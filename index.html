@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"></link>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+
+<body>
+    <div style="height: 20px;"></div>
+    <div class="container">
+        <h1>Testowanie AJAX headers</h1>
+        <div style="height: 20px;"></div>
+        <div id="result" style="color: red"></div>
+    </div>
+
+    <script>
+        $.ajax({
+                method: "GET",
+                url: "api.php",
+                headers: {
+                    "Authorization": "12345",
+                }
+            })
+            .done(function (data) {
+                var code = '<select class="form-control" style="width:200px;">'
+                var result = JSON.parse(data);
+                for (record in result) {
+                    code += '<option value="' + result[record].id + '">';
+                    var result = JSON.parse(data);
+                    code += result[record].name;
+                    code += '</option>';
+                }
+                code += "</select>";
+                $('#result').html(code);
+            })
+            .fail(function () {
+                $('#result').html("Nie udało się pobrać");
+            })
+    </script>
+</body>
+
+</html>
